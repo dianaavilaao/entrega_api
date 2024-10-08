@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      JSONPlaceholder Posts
+      Lista de posts
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,28 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>
-        <h1>Posts</h1>
-      </ion-card-title>
+      <ion-card-title>{{ isEditMode ? 'Update Post' : 'Create New Post' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input [(ngModel)]="post.title" name="title" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Body</ion-label>
+          <ion-textarea [(ngModel)]="post.body" name="body" required></ion-textarea>
+        </ion-item>
+
+        <ion-button expand="full" type="submit">{{ isEditMode ? 'Update Post' : 'Create Post' }}</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="posts && posts.length > 0">
+    <ion-card-header>
+      <ion-card-title>Posts</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
@@ -20,8 +39,16 @@
             <h2>{{ post.title }}</h2>
             <p>{{ post.body }}</p>
           </ion-label>
+          <ion-button color="primary" (click)="editPost(post)">Edit</ion-button>
+          <ion-button color="danger" (click)="deletePost(post.id)">Delete</ion-button>
         </ion-item>
       </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="posts && posts.length === 0">
+    <ion-card-content>
+      <p>No posts available</p>
     </ion-card-content>
   </ion-card>
 </ion-content>
