@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@angular/common": "^15.0.0",
-    "rxjs": "^7.8.1"
-  }
-}

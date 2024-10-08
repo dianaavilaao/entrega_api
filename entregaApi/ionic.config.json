@@ -1,0 +1,7 @@
+{
+  "name": "entregaApi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
